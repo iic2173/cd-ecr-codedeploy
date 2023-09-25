@@ -15,6 +15,14 @@ app.get("/", (req, res) => {
   res.json(response);
 });
 
+// GET endpoint
+app.get("/hello", (req, res) => {
+  const response = {
+    message: "Hello from iic2173!",
+  };
+  res.json(response);
+});
+
 // POST endpoint
 app.post("/", (req, res) => {
   const requestBody = req.body;
