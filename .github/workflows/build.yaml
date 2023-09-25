@@ -1,0 +1,35 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - main # Change this to the branch you want to trigger the workflow on
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::396488201061:role/github-actions-ecr-push-image
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          mask-password: "true"
+
+      - name: Build, tag, and push docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: api-iic2173
+          IMAGE_TAG: latest
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG

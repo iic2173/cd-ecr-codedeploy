@@ -1,0 +1,9 @@
+version: "3"
+services:
+  express-app:
+    container_name: api
+    build:
+      context: ./api # Path to the folder containing your app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
