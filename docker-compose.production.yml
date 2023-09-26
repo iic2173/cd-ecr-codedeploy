@@ -1,7 +1,7 @@
 version: "3"
 services:
   api:
-    image: 396488201061.dkr.ecr.us-east-1.amazonaws.com/api-iic2173
+    image: public.ecr.aws/o6g2h0d9/iic2173-api:latest
     ports:
       - 3000:3000
     environment:

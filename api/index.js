@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 // GET endpoint
 app.get("/hello", (req, res) => {
   const response = {
-    message: "Hello from iic2173!",
+    message: "Hello from iic2173! v2!",
   };
   res.json(response);
 });
